@@ -85,7 +85,17 @@ public class ModelViewer : MonoBehaviour
         yield return null;
 
         DateTime dateTime = DateTime.Now;
-        ScreenCapture.CaptureScreenshot( _outputPath + $"/{_models[ _currentModel ].name}_{dateTime:yyMMddHHmmss}.png" );
+        string fileName;
+        if ( _models.Count != 0 )
+        {
+            fileName = $"/{_models[ _currentModel ].name}_{dateTime:yyMMddHHmmss}.png";
+        }
+        else
+        {
+            fileName = $"/{dateTime:yyMMddHHmmss}.png";
+        }
+
+        ScreenCapture.CaptureScreenshot( _outputPath + fileName );
 
         yield return _wait;
 
