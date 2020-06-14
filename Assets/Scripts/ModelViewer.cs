@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -6,10 +7,12 @@ using UnityEngine;
 public class ModelViewer : MonoBehaviour
 {
     [SerializeField] private ModelController _modelController = null;
+    [SerializeField] private Canvas _ui = null;
 
     private List<GameObject> _models = new List<GameObject>();
     private int _currentModel = 0;
     private string _outputPath = string.Empty;
+    private WaitForEndOfFrame _wait = new WaitForEndOfFrame();
 
     private void Start()
     {
@@ -56,8 +59,21 @@ public class ModelViewer : MonoBehaviour
             Directory.CreateDirectory( _outputPath );
         }
 
+        StartCoroutine( CaptureScreen() );
+    }
+
+    private IEnumerator CaptureScreen()
+    {
+        _ui.enabled = false;
+
+        yield return null;
+
         DateTime dateTime = DateTime.Now;
         ScreenCapture.CaptureScreenshot( _outputPath + $"/{_models[ _currentModel ].name}_{dateTime:yyMMddHHmmss}.png" );
+
+        yield return _wait;
+
+        _ui.enabled = true;
     }
 
     private void ShowModel( GameObject model )
