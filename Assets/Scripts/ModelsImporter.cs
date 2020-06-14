@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using Dummiesman;
 
-public class ObjImporter : MonoBehaviour
+public class ModelsImporter : MonoBehaviour
 {
     [SerializeField] private ModelViewer _modelViewer = null;
 
@@ -16,6 +16,10 @@ public class ObjImporter : MonoBehaviour
         LoadModels( files );
     }
 
+    /// <summary>
+    /// Searches "Input" folder recursively for all *.obj files
+    /// </summary>
+    /// <returns>List of paths to .obj files</returns>
     private List<string> GetFiles()
     {
         List<string> fileList = new List<string>();
@@ -39,6 +43,10 @@ public class ObjImporter : MonoBehaviour
         return fileList;
     }
 
+    /// <summary>
+    /// Loads models from paths and puts them on scene
+    /// </summary>
+    /// <param name="files">List of paths of files to load</param>
     private void LoadModels( List<string> files )
     {
         var loadedModels = new List<GameObject>();

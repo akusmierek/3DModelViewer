@@ -322,7 +322,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -0.0000018133796, z: 3.91e-43, w: -0.00000157873}
+  m_BoundingSphereOverride: {x: 1.229e-42, y: 1.02e-43, z: 3.91e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -790,6 +790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _modelController: {fileID: 1104609409}
+  _ui: {fileID: 965257686}
 --- !u!114 &1104609409
 MonoBehaviour:
   m_ObjectHideFlags: 0

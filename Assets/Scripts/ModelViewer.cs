@@ -19,6 +19,10 @@ public class ModelViewer : MonoBehaviour
         _outputPath = Application.dataPath + "/Output";
     }
 
+    /// <summary>
+    /// Sets list of loaded models
+    /// </summary>
+    /// <param name="models">List of models' GameObjects on scene</param>
     public void SetModels( List<GameObject> models )
     {
         _models = models;
@@ -28,6 +32,9 @@ public class ModelViewer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shows next model if available and hides current
+    /// </summary>
     public void ShowNextModel()
     {
         if ( _currentModel + 1 < _models.Count )
@@ -40,6 +47,9 @@ public class ModelViewer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shows previous model if available and hides current
+    /// </summary>
     public void ShowPreviousModel()
     {
         if ( _currentModel - 1 >= 0 && _models.Count != 0 )
@@ -52,6 +62,9 @@ public class ModelViewer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Function for button to run coroutine to take photo
+    /// </summary>
     public void TakePhoto()
     {
         if ( !Directory.Exists( _outputPath ) )
@@ -62,6 +75,9 @@ public class ModelViewer : MonoBehaviour
         StartCoroutine( CaptureScreen() );
     }
 
+    /// <summary>
+    /// Takes photo without ui
+    /// </summary>
     private IEnumerator CaptureScreen()
     {
         _ui.enabled = false;
@@ -76,6 +92,10 @@ public class ModelViewer : MonoBehaviour
         _ui.enabled = true;
     }
 
+    /// <summary>
+    /// Resets and shows given model on scene
+    /// </summary>
+    /// <param name="model">Model to show</param>
     private void ShowModel( GameObject model )
     {
         model.transform.SetPositionAndRotation( Vector3.zero, Quaternion.identity );
