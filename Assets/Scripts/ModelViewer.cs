@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ModelViewer : MonoBehaviour
 {
+    [SerializeField] private ModelController _modelController = null;
+
     private List<GameObject> _models = new List<GameObject>();
     private int _currentModel = 0;
     private string _outputPath = string.Empty;
@@ -19,7 +21,7 @@ public class ModelViewer : MonoBehaviour
         _models = models;
         if ( _models.Count != 0 )
         {
-            _models[ 0 ].SetActive( true );
+            ShowModel( _models[ 0 ] );
         }
     }
 
@@ -28,8 +30,10 @@ public class ModelViewer : MonoBehaviour
         if ( _currentModel + 1 < _models.Count )
         {
             _models[ _currentModel ].SetActive( false );
+
             _currentModel++;
-            _models[ _currentModel ].SetActive( true );
+
+            ShowModel( _models[ _currentModel ] );
         }
     }
 
@@ -38,8 +42,10 @@ public class ModelViewer : MonoBehaviour
         if ( _currentModel - 1 >= 0 && _models.Count != 0 )
         {
             _models[ _currentModel ].SetActive( false );
+
             _currentModel--;
-            _models[ _currentModel ].SetActive( true );
+
+            ShowModel( _models[ _currentModel ] );
         }
     }
 
@@ -52,5 +58,12 @@ public class ModelViewer : MonoBehaviour
 
         DateTime dateTime = DateTime.Now;
         ScreenCapture.CaptureScreenshot( _outputPath + $"/{_models[ _currentModel ].name}_{dateTime:yyMMddHHmmss}.png" );
+    }
+
+    private void ShowModel( GameObject model )
+    {
+        model.transform.SetPositionAndRotation( Vector3.zero, Quaternion.identity );
+        model.SetActive( true );
+        _modelController.SetCurrentModel( model.transform );
     }
 }
