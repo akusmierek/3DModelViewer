@@ -6,11 +6,14 @@ using Dummiesman;
 
 public class ObjImporter : MonoBehaviour
 {
+    [SerializeField] private ModelViewer _modelViewer = null;
+
+
     private void Start()
     {
         var files = GetFiles();
 
-        LoadObjects( files );
+        LoadModels( files );
     }
 
     private List<string> GetFiles()
@@ -36,12 +39,17 @@ public class ObjImporter : MonoBehaviour
         return fileList;
     }
 
-    private void LoadObjects( List<string> files )
+    private void LoadModels( List<string> files )
     {
+        var loadedModels = new List<GameObject>();
+
         foreach ( var file in files )
         {
-            GameObject loadedObj = new OBJLoader().Load( file );
-            loadedObj.SetActive( false );
+            GameObject loadedModel = new OBJLoader().Load( file );
+            loadedModel.SetActive( false );
+            loadedModels.Add( loadedModel );
         }
+
+        _modelViewer.SetModels( loadedModels );
     }
 }
